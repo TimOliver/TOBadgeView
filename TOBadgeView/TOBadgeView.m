@@ -1,15 +1,13 @@
 //
-//  ViewController.h
+//  TOBadgeView.m
 //  TOBadgeViewExample
 //
 //  Created by Tim Oliver on 8/11/18.
 //  Copyright © 2018 Tim Oliver. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "TOBadgeView.h"
 
-@interface ViewController : UITableViewController
-
+@implementation TOBadgeView
 
 @end
-
