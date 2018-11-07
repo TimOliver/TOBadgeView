@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  TableViewCell.h
 //  TOBadgeViewExample
 //
 //  Created by Tim Oliver on 8/11/18.
@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+NS_ASSUME_NONNULL_BEGIN
 
-@property (strong, nonatomic) UIWindow *window;
+@interface TableViewCell : UITableViewCell
 
 @end
 
+NS_ASSUME_NONNULL_END
