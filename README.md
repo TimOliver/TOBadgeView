@@ -4,10 +4,10 @@
 <img src="https://raw.githubusercontent.com/TimOliver/TOBadgeView/master/screenshot.jpg" width="750" style="margin:0 auto" />
 </p>
 
-[![CocoaPods](https://img.shields.io/cocoapods/dt/TOBadgeView.svg?maxAge=3600)](https://cocoapods.org/pods/TOWebContentViewController)
-[![Version](https://img.shields.io/cocoapods/v/TOBadgeView.svg?style=flat)](http://cocoadocs.org/docsets/TOCropViewController)
+[![CocoaPods](https://img.shields.io/cocoapods/dt/TOBadgeView.svg?maxAge=3600)](https://cocoapods.org/pods/TOBadgeView)
+[![Version](https://img.shields.io/cocoapods/v/TOBadgeView.svg?style=flat)](http://cocoadocs.org/docsets/TOBadgeView)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/TimOliver/TOBadgeView/master/LICENSE)
-[![Platform](https://img.shields.io/cocoapods/p/TOBadgeView.svg?style=flat)](http://cocoadocs.org/docsets/TOWebContentViewController)
+[![Platform](https://img.shields.io/cocoapods/p/TOBadgeView.svg?style=flat)](http://cocoadocs.org/docsets/TOBadgeView)
 [![PayPal](https://img.shields.io/badge/paypal-donate-blue.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=M4RKULAVKV7K8)
 
 `TOBadgeView` is a very basic `UIView` subclass to provide a GPU-efficient recreation of the class iOS badge icon.
