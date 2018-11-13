@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TOBadgeView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TableViewCell : UITableViewCell
+
+@property (nonatomic, weak) IBOutlet TOBadgeView *badgeView;
 
 @end
 
