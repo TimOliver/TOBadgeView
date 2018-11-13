@@ -60,6 +60,8 @@
 
 - (void)commonInit
 {
+    _textInsets = CGSizeMake(10.0f, 4.0f);
+    _text = @"1";
     self.backgroundColor = [UIColor clearColor];
 
     //Set to software rendered in IB
@@ -77,7 +79,8 @@
 - (void)setUpDefaultProperties
 {
     // Triggers the accessors and resets them back to
-    // their default values. This is better than redundancy.
+    // their default values. I did it this way to reduce the
+    // redunancy of configuring views with nullable default values.
     self.font = nil;
     self.badgeColor = nil;
     self.textColor = nil;
@@ -98,11 +101,13 @@
     self.layer.contents = nil;
     self.layer.masksToBounds = YES;
 
+    // Create the label if it hasn't been made already
     if (!self.textLabel) {
         self.textLabel = [[_TOBadgeLabel alloc] initWithFrame:CGRectZero];
         [self addSubview:self.textLabel];
     }
 
+    // Configure the label
     self.textLabel.font = self.font;
     self.textLabel.textAlignment = NSTextAlignmentCenter;
     self.textLabel.textColor = self.textColor;
@@ -111,7 +116,34 @@
 
 - (void)sizeToFit
 {
+    CGRect frame = self.frame;
+    CGSize labelSize = CGSizeZero;
 
+    // If we have the label, call sizeToFit to shrink it to the bare minimum
+    if (!self.softwareRendered) {
+        [self.textLabel sizeToFit];
+        labelSize = self.textLabel.frame.size;
+    }
+    else { // With software rendering, get the size from the font
+        labelSize = [self.text sizeWithAttributes:@{NSFontAttributeName: self.font}];
+    }
+
+    // Height is the height of the text + the inset padding
+    frame.size.height = labelSize.height + (self.textInsets.height * 2.0f);
+
+    // If a single char, default to a circle
+    if (self.text.length <= 1) {
+        frame.size.width = frame.size.height;
+    }
+    else { // Else, add the horizontal padding
+        frame.size.width = labelSize.width + (self.textInsets.width * 2.0f);
+    }
+
+    // Add back to the frame
+    self.frame = frame;
+
+    // Reset the text label
+    self.textLabel.frame = self.bounds;
 }
 
 #pragma mark - View Layout -
@@ -201,8 +233,16 @@
 
     // Set font to be bold
     if (!_font) {
-        _font = [UIFont systemFontOfSize:18.0f weight:UIFontWeightMedium];
+        _font = [UIFont systemFontOfSize:16.0f weight:UIFontWeightMedium];
     }
+
+    // Update the layer to be re-rendered
+    if (self.softwareRendered) {
+        self.isDirty = YES;
+        return;
+    }
+
+    self.textLabel.font = _font;
 }
 
 - (void)setTextColor:(UIColor *)textColor
@@ -214,6 +254,13 @@
     if (!_textColor) {
         _textColor = UIColor.whiteColor;
     }
+
+    if (self.softwareRendered) {
+        self.isDirty = YES;
+        return;
+    }
+
+    self.textLabel.textColor = _textColor;
 }
 
 - (void)setBadgeColor:(UIColor *)badgeColor
@@ -223,11 +270,19 @@
 
     // Set badge color to be light-ish red
     if (!_badgeColor) {
-        _badgeColor = [UIColor colorWithRed:250.0f/255.0f
-                                      green:58.0f/255.0f
-                                       blue:44.0f/255.0f
+        _badgeColor = [UIColor colorWithRed:255.0f/255.0f
+                                      green:59.0f/255.0f
+                                       blue:48.0f/255.0f
                                       alpha:1.0f];
     }
+
+    // Update the views with the new color
+    if (self.softwareRendered) {
+        self.isDirty = YES;
+        return;
+    }
+
+    self.textLabel.badgeColor = _badgeColor;
 }
 
 @end
@@ -239,9 +294,9 @@
 
  When a `UILabel` is in a table view cell and the cell is tapped,
  iOS will automatically loop through every subview, and depending on its
- type (such as a label) will forcibly change its backgrounf color to clear.
+ type (such as a label) will forcibly change its background color to clear.
 
- We explicitly don't ever want that, so in this case, we set a property
+ We explicitly don't ever want that ever, so in this case, we set a custom property
  that controls the background color, while explicitly overriding setting
  the background color of the view to be a no-op.
 
