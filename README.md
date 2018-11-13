@@ -1,7 +1,7 @@
 # TOBadgeView
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/TimOliver/TOBadgeView/master/screenshot.jpg" width="500" style="margin:0 auto" />
+<img src="https://raw.githubusercontent.com/TimOliver/TOBadgeView/master/screenshot.jpg" width="750" style="margin:0 auto" />
 </p>
 
 [![CocoaPods](https://img.shields.io/cocoapods/dt/TOBadgeView.svg?maxAge=3600)](https://cocoapods.org/pods/TOWebContentViewController)
