@@ -1,4 +1,4 @@
-# TOWebContentViewController
+# TOBadgeView
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/TimOliver/TOBadgeView/master/screenshot.jpg" width="500" style="margin:0 auto" />
