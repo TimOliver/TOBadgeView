@@ -144,6 +144,16 @@
 
     // Reset the text label
     self.textLabel.frame = self.bounds;
+    
+    [self invalidateIntrinsicContentSize];
+}
+
+#pragma mark - AutoLayout -
+
+- (CGSize)intrinsicContentSize {
+    CGSize size = self.bounds.size;
+    
+    return size;
 }
 
 #pragma mark - View Layout -
